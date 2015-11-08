@@ -1,0 +1,98 @@
+/* Layout de la pagina */
+.page-content {
+    padding: 20px 0;
+    width: 80%;
+    margin: auto;
+}
+
+.task-list {
+    width: 60%;
+    margin: auto;
+}
+@media only screen and (max-width: 640px) {
+    .task-list {
+        width: 100%;
+    }
+}
+/* Icono */
+.page-logo {
+    position: absolute;
+    left: 14px;
+    line-height: 64px;
+}
+@media screen and (max-width: 1024px) {
+    .page-logo {
+        line-height: 56px;
+    }
+}
+
+.page-logo img {
+    height: 36px;
+}
+
+/* Footer */
+.footer_links {
+
+}
+.mdl-mini-footer__link-list img {
+    height: 18px;
+    margin-right: 5px;
+}
+/* Cada elemento */
+.task-item {
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    padding: 10px 20px;
+}
+.task-item:last-child {
+    border-bottom: none;
+}
+
+/* CSS para el input de tarea nueva */
+.task-list .mdl-textfield__input {
+    padding: 4px 20px;
+}
+
+.task-list .mdl-textfield__label {
+    padding-left: 20px;
+}
+
+.task-list .mdl-textfield {
+    width: 100%;
+}
+
+
+/* Animacion para cuando completan una tarea */
+.task-item .mdl-checkbox__label {
+    transition: text-decoration 0.5s, color 1s;
+}
+
+/* Cuando completan una tarea tiene que estar tachada y un poco mas gris */
+.task-item .is-checked .mdl-checkbox__label  {
+    text-decoration: line-through;
+    color: rgba(0,0,0,0.24);
+}
+
+/* El menu de abajo */
+/* Las acciones de las tareas son mas chicas*/
+.task-list .mdl-card__actions, .task-list .mdl-card__actions a  {
+    color: rgba(0,0,0,.54);
+    font-size: 12px;
+    font-weight: 100;
+    text-decoration: none;
+}
+
+.task-filter {
+    padding: 3px 5px;
+
+}
+
+.task-filter.active {
+    border: 1px solid;
+    border-color: rgba(0,0,0,0.2);
+}
+
+#delete {
+	width: 16px;
+	height: 16px;
+	margin-bottom: 4.5px;
+}
