@@ -96,3 +96,12 @@
 	height: 16px;
 	margin-bottom: 4.5px;
 }
+
+.comentario {
+	width: 75%;
+	text-align: center;
+	display: block;
+	margin: auto;
+	position: fixed;
+	bottom: 125px;
+}
