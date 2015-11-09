@@ -128,3 +128,8 @@
 h3, h5, h6 {
 	text-align: center;
 }
+
+.pequeno {
+	font-size: 14px;
+	margin-right: 15px;
+}

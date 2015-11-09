@@ -93,6 +93,24 @@ app.controller("mainCtrl", function($scope, $firebaseObject) {
 		};
 	
 	
+		//------------------------------------------------RESET-CONTRASEÑA----------------------------------------------------------
+		resetearContrasena = function(){
+			var email = prompt("Introdueix el teu correu");
+
+			var ref = new Firebase("https://listatareasacamica.firebaseio.com");
+		ref.resetPassword({
+		  email : email
+		}, function(error) {
+		  if (error === null) {
+			alert("Se ha enviado el correo de recuperación :)");
+		  } else {
+			alert("Error al enviar el correo:", error);
+			console.log("Error enviat el correu de recuperació:", error);
+		  }
+		});
+		}
+	
+	
 	
 	
 	
