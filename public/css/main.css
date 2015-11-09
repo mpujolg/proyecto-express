@@ -8,6 +8,7 @@
 .task-list {
     width: 90%;
     margin: auto;
+	margin-top: 20px;
 }
 @media only screen and (max-width: 640px) {
     .task-list {
@@ -107,11 +108,23 @@
 }
 
 .anotacions {
-	color: red;
 	float: right;
+	margin-top: 0;
 }
 
-.anotacions h4 {
-	color: red;
-	font-size: 22px;
+.centre {
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	margin-top: 22px;
+}
+
+.dreta {
+	position: absolute;
+	right: 25px;
+	margin-top: 22px;
+}
+
+h3, h5, h6 {
+	text-align: center;
 }

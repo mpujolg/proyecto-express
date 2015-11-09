@@ -4,6 +4,99 @@ var app = angular.module("Tareas", ["firebase"]);
 //main (y único) Controller
 app.controller("mainCtrl", function($scope, $firebaseObject) {
 	
+
+	comprovarEstado = function(){
+		if(users==undefined){
+			$("#datosPersonales").hide();
+			$("#mainInput").hide();
+		} else {
+			$("#ocultar").hide();
+			$("#datosPersonales").hide();
+			$("#datosPersonales").slideDown(2000)();
+		};
+	};
+	
+	var ref = new Firebase("https://listatareasacamica.firebaseio.com");
+	var dbUsuari = ref.getAuth();
+		if(dbUsuari){
+			//Creem una ruta que sigui usuers/ID, allà es guardaràn les dades de l'usuari
+			var users = new Firebase("https://listatareasacamica.firebaseio.com/users/" + dbUsuari.uid + "");
+			$scope.users = $firebaseObject(users);
+		};
+	
+	//--------------------------------------------------REGISTRAR------------------------------------------------------------
+	registrar = function(){
+	
+	//pedimos los datos necesarios
+	var nom = prompt("Nombre:");
+	var email = prompt("Email:");
+	var password = prompt("Contraseña:");
+	var repassword = prompt("Confimar contraseña:");
+	
+	if(nom=="" || email=="" || password=="" || repassword==""){
+		alert("No puedes dejar campos vacíos");
+	} else if(password != repassword){
+		errors("Las dos contraseñas no coinciden");
+	} else {
+			var ref = new Firebase("https://listatareasacamica.firebaseio.com");
+			ref.createUser({
+				
+				  email    : email,
+				  password : password
+				
+			}, function(error, userData) {
+				  if (error){
+					  alert(error);
+				  } else {
+
+						 var nouUsuari = new Firebase("https://listatareasacamica.firebaseio.com/users/" + userData.uid + ""),
+					  	 id = userData.uid;
+					  
+								nouUsuari.set({
+										nom: nom,
+										id: id,
+										email: email,
+										pass: password,
+									});
+
+				  }
+			});
+	}
+	
+};
+	
+	
+	//--------------------------------------------------LOGIN------------------------------------------------------------
+	login = function(){
+			var email = prompt("Email:");
+			var password = prompt("Contraseña:");
+			var ref = new Firebase("https://listatareasacamica.firebaseio.com");
+			ref.authWithPassword({
+			  email    : email,
+			  password : password
+			}, function(error, authData) {
+			  if (error) {
+				console.log("Login Failed!", error);
+				 alert("Ha habido un error :( (" + error + ")");
+			  } else {
+				console.log("Authenticated successfully with payload:", authData);
+					var refer = new Firebase("https://listatareasacamica.firebaseio.com");
+					var dbUsuari = refer.getAuth();
+						if(dbUsuari){
+							//Creem una ruta que sigui usuers/ID, allà es guardaràn les dades de l'usuari
+							var users = new Firebase("https://listatareasacamica.firebaseio.com/users/" + dbUsuari.uid + "");
+							$scope.users = $firebaseObject(users);
+							location.reload(); //refrescar la página
+						};
+			  }
+			});
+		};
+	
+	
+	
+	
+	
+	
 	//creamos las referencias de Firebase en el apartado general y tareas
 	//con estas variables añadiremos, modificaremos y borraremos datos de Firebase
 	var ref_general = new Firebase("https://listatareasacamica.firebaseio.com/general");
@@ -16,14 +109,20 @@ app.controller("mainCtrl", function($scope, $firebaseObject) {
 	
 	//--------------------------------------------------AGREGAR------------------------------------------------------------
 	$scope.agregar = function(){
+		
 		//tomamos el valor del input
 		var titol = $("#titulo").val();
+		var data = new Date().toString().slice(0, -15);
+		$scope.tu = $firebaseObject(users);
+		alert($scope.tu.nom);
 		
 		//agregamos la tarea a Firebase
-		ref.push({
+		/*ref.push({
 			titol: titol,
-			completada: "is-not-checked"
-		});
+			completada: "is-not-checked",
+			data: data,
+			autor: autor
+		});*/
 		
 		//limpiamos el input
 		$("#titulo").val("");
@@ -66,3 +165,6 @@ app.controller("mainCtrl", function($scope, $firebaseObject) {
 	});
 	
 });
+
+
+

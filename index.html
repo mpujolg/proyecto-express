@@ -21,33 +21,44 @@
     <link rel="stylesheet" href="public/css/main.css">
 
 </head>
-<body>
+<body onload="comprovarEstado()">
     <!-- Always shows a header, even in smaller screens. -->
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <header class="mdl-layout__header">
+        <header class="mdl-layout__header" ng-controller="mainCtrl">
             <div class="mdl-layout__header-row">
                 <div class="page-logo">
                     <img src="public/images/logo-light.svg"/>
                 </div>
                 <!-- Title -->
-                <span class="mdl-layout-title">Proyecto lista de tareas (con Base de Datos | SPA Angular)</span>
+                <span class="mdl-layout-title">Proyecto lista de tareas</span>
+                <span class="mdl-layout-title dreta"> 
+					<span onclick="login()">LOGIN</span>
+					<span> | </span>
+					<span onclick="registrar()">REGISTRAR</span>
+				</span>
             </div>
         </header>
 
-        <main class="mdl-layout__content">
+        <main class="mdl-layout__content" ng-controller="mainCtrl">
             <div class="page-content">
+			
+			<div id="datosPersonales">
+			<h3 onclick="nom()">Hola {{users.nom}}!</h3>
+			<h5 id="nombre">({{users.email}})</h5>
+			</div>
                 
- <div class="task-list mdl-card mdl-shadow--2dp" ng-controller="mainCtrl">
-    <div>
+ <div class="task-list mdl-card mdl-shadow--2dp">
+    <div id="mainInput">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input" type="text" id="titulo" />
             <label class="mdl-textfield__label">¿Qué quieres hacer hoy...?</label>
         </div>
     </div>
+            <h6 id="ocultar">¡Registrate para poder publicar tareas!</h6>
     <div class="task-item" ng-repeat="(id, tarea) in tareas"> <!-- NG-REPEAT DE CADA TAREA EN LAS TAREAS (con id para poder seleccionar concertamente tarea por tarea) -->
         <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-card__supporting-text is-checkedis-checked {{tarea.completada}}">
             <span ng-click="completar(id)" class="mdl-checkbox__label">{{tarea.titol}}</span>
-			<img ng-click="eliminar(id)" id="delete" src="public/images/delete.ico"> <!-- ELIMINAR LA TAREA (coge el id para borrar solo esta tarea) -->
+			<img ng-if="tarea.autor==users.nom" ng-click="eliminar(id)" id="delete" src="public/images/delete.ico"> <!-- ELIMINAR LA TAREA (coge el id para borrar solo esta tarea) -->
 			<div class="anotacions">
 				<strong>{{tarea.autor}}</strong> - {{tarea.data}}
 			</div>
@@ -65,8 +76,7 @@
 				
 				
 				<div class="comentario">
-					De momento no existe autentificación, todo el mundo puede agregar y borrar tareas libremente y TODAS aparecen en esta lista. <br>
-					Sería buenísimo que publicaran de dónde son, comentarios... ;)
+					Marc Pujol Gualdo - Cualquier cosa charlamos en los foros de Acámica :)
 				</div>
 
 				
