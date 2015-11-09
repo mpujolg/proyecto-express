@@ -137,7 +137,7 @@ app.controller("mainCtrl", function($scope, $firebaseObject) {
 				titol: titol,
 				completada: "is-not-checked",
 				data: data
-			}).;
+			});
 		
 			//incrementamos el número de tareas totales en 1
 			ref_general.child("numtareas").transaction(function(numactual) {
