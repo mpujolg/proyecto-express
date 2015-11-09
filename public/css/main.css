@@ -6,7 +6,7 @@
 }
 
 .task-list {
-    width: 60%;
+    width: 90%;
     margin: auto;
 }
 @media only screen and (max-width: 640px) {
@@ -104,4 +104,14 @@
 	margin: auto;
 	position: fixed;
 	bottom: 125px;
+}
+
+.anotacions {
+	color: red;
+	float: right;
+}
+
+.anotacions h4 {
+	color: red;
+	font-size: 22px;
 }
