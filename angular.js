@@ -131,24 +131,23 @@ app.controller("mainCtrl", function($scope, $firebaseObject) {
 		//tomamos el valor del input
 		var titol = $("#titulo").val();
 		var data = new Date().toString().slice(0, -15);
-		$scope.tu = $firebaseObject(users);
-		alert($scope.tu.nom);
 		
-		//agregamos la tarea a Firebase
-		/*ref.push({
-			titol: titol,
-			completada: "is-not-checked",
-			data: data,
-			autor: autor
-		});*/
-		
-		//limpiamos el input
-		$("#titulo").val("");
+			//agregamos la tarea a Firebase
+			ref.push({
+				titol: titol,
+				completada: "is-not-checked",
+				data: data
+			}).;
 		
 			//incrementamos el número de tareas totales en 1
 			ref_general.child("numtareas").transaction(function(numactual) {
 				return numactual + 1;
 			});
+		
+		//limpiamos el input
+		$("#titulo").val("");
+		
+		return false;
 	};
 	
 	

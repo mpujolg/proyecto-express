@@ -58,7 +58,7 @@
             <h6 id="ocultar">¡Registrate para poder publicar tareas!</h6>
     <div class="task-item" ng-repeat="(id, tarea) in tareas"> <!-- NG-REPEAT DE CADA TAREA EN LAS TAREAS (con id para poder seleccionar concertamente tarea por tarea) -->
         <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-card__supporting-text is-checkedis-checked {{tarea.completada}}">
-            <span ng-click="completar(id)" class="mdl-checkbox__label">{{tarea.titol}}</span>
+            <span ng-click="completar(id)" class="mdl-checkbox__label">{{tarea.titol}}{{users.nom}}</span>
 			<img ng-if="tarea.autor==users.nom" ng-click="eliminar(id)" id="delete" src="public/images/delete.ico"> <!-- ELIMINAR LA TAREA (coge el id para borrar solo esta tarea) -->
 			<div class="anotacions">
 				<strong>{{tarea.autor}}</strong> - {{tarea.data}}
