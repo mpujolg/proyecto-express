@@ -131,14 +131,15 @@ app.controller("mainCtrl", function($scope, $firebaseObject) {
 		//tomamos el valor del input
 		var titol = $("#titulo").val();
 		var data = new Date().toString().slice(0, -15);
+		var autor = $("#nombreusuario").html();
 		
-			//agregamos la tarea a Firebase
-			ref.push({
-				titol: titol,
-				completada: "is-not-checked",
-				data: data,
-				autor: "Marc Pujol"
-			});
+		//agregamos la tarea a Firebase
+		ref.push({
+			titol: titol,
+			completada: "is-not-checked",
+			data: data,
+			autor: autor
+		});
 		
 			//incrementamos el número de tareas totales en 1
 			ref_general.child("numtareas").transaction(function(numactual) {
@@ -147,8 +148,6 @@ app.controller("mainCtrl", function($scope, $firebaseObject) {
 		
 		//limpiamos el input
 		$("#titulo").val("");
-		
-		return false;
 	};
 	
 	
@@ -179,7 +178,8 @@ app.controller("mainCtrl", function($scope, $firebaseObject) {
 	$("#titulo").keypress(function(e) {
     	if(e.which == 13) {
 			$scope.agregar();
-    	}
+    	};
+		Event.preventDefault();
 	});
 	
 });
