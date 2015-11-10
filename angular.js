@@ -136,7 +136,8 @@ app.controller("mainCtrl", function($scope, $firebaseObject) {
 			ref.push({
 				titol: titol,
 				completada: "is-not-checked",
-				data: data
+				data: data,
+				autor: "Marc Pujol"
 			});
 		
 			//incrementamos el número de tareas totales en 1
