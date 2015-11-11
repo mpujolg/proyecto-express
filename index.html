@@ -2,6 +2,8 @@
 <html ng-app="Tareas">
 <head>
     <meta charset="utf-8">
+	 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	
     <title>Proyecto Acamica Express</title>
 	
 	<!-- AngularJS -->
@@ -70,6 +72,8 @@
         <div style="display=block; margin=auto">
 			<h2 ng-if="general.numtareas==0" style="text-align='center'">¡No hay tareas!</h2>
             <span ng-if="!general.numtareas==0" class="task-filter"><a href="">{{general.numtareas}} Tarea<span ng-if="general.numtareas!=1">s</span></a></span>
+			<span  class="task-filter">-</span>
+			<span  class="task-filter"><a href="">{{general.numusuarios}} Usuario<span ng-if="general.numusuarios!=1">s</span> registrado<span ng-if="general.numusuarios!=1">s</span></a></span>
             <!--<span class="task-filter"><a href="">{{general.numpendientes}} Pendientes</a></span>
             <span class="task-filter"><a href="">{{general.numcompletades}} Completas</a></span>-->
         </div>
