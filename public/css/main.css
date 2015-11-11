@@ -15,7 +15,7 @@
 		width: 95%;
 	}
     .task-list {
-        width: 100%;
+        width: 90%;
     }
 	.mdl-layout-title {
 		font-size: 16px;
@@ -28,9 +28,6 @@
 		margin-top: 60px;
 		width: 100%;
 		text-align: center;
-	}
-	.pequeno#pequeno {
-		display: none !important;
 	}
 }
 /* Icono */
@@ -114,15 +111,6 @@
 	width: 16px;
 	height: 16px;
 	margin-bottom: 4.5px;
-}
-
-.comentario {
-	width: 75%;
-	text-align: center;
-	display: block;
-	margin: auto;
-	position: fixed;
-	bottom: 125px;
 }
 
 .anotacions {
