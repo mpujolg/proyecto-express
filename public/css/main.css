@@ -17,6 +17,21 @@
     .task-list {
         width: 100%;
     }
+	.mdl-layout-title {
+		font-size: 16px;
+	}
+	.mdl-layout__header {
+		height: 100px;
+	}
+	.mdl-layout-title.dreta {
+		position: absolute;
+		margin-top: 60px;
+		width: 100%;
+		text-align: center;
+	}
+	.pequeno#pequeno {
+		display: none !important;
+	}
 }
 /* Icono */
 .page-logo {
