@@ -140,5 +140,47 @@ h3, h5, h6 {
 	margin-right: 15px;
 }
 
+.forms {
+	width: 45%;
+	display: block;
+	margin: auto;
+	margin-bottom: 100px;
+	padding: 20px 75px;
+	border-radius: 15px;
+	border: 1px solid grey;
+}
 
-/* ------------------------- VISTA MOBILE ------------------------- */
+.forms h5 {
+	display: inline-block;
+	margin: auto;
+	float: left;
+	font-size: 20px;
+}
+
+.forms input {
+	float: right;
+	display: inline-block;
+	margin-right: auto;
+	border-radius: 3px;
+	border: 1px solid lightgrey;
+	height: 17px;
+	padding: 2px 10px 2px 10px;
+	font-size: 14px;
+}
+
+.forms span {
+	display: list-item;
+	margin-bottom: 25px;
+}
+
+.forms button {
+	display: block;
+	margin: auto;
+	background-color: dodgerblue;
+	color: white;
+	border: 0px solid grey;
+	border-radius: 7px;
+	font-family: Roboto, sans-serif;
+	font-size: 18px;
+	padding: 8px 15px;
+}

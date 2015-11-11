@@ -35,9 +35,9 @@
                 <span class="mdl-layout-title">Proyecto lista de tareas (VERSIÓN MARC PUJOL)</span>
                 <span class="mdl-layout-title dreta"> 
 					<span class="pequeno" onclick="resetearContrasena()">Olvidé la contrasenya</span>
-					<span onclick="login()">LOGIN</span>
+					<span onclick="mostrar('#login')">LOGIN</span>
 					<span> | </span>
-					<span onclick="registrar()">REGISTRAR</span>
+					<span onclick="mostrar('#registrar')">REGISTRAR</span>
 				</span>
             </div>
         </header>
@@ -45,8 +45,25 @@
         <main class="mdl-layout__content" ng-controller="mainCtrl">
             <div class="page-content">
 			
+			<div class="forms" id="registrar">
+			<h3>Registrar nuevo usuario</h3>
+			<span><h5>Nombre</h5><input id="nombre" type="text" placeholder="Nombre de Usuario"></span>
+			<span><h5>Email</h5><input id="email" type="text" placeholder="nombre@dominio.com"></span>
+			<span><h5>Contraseña</h5><input id="pass" type="password" placeholder="Contraseña"></span>
+			<span><h5>Confirmar Contraseña</h5><input id="repass" type="password" placeholder="Repita la contraseña"></span>
+			<a><button onclick="registrar()">Registrar</button></a>
+			</div>
+				
+			<div class="forms" id="login">
+			<h3>Iniciar Sesión</h3>
+			<span><h5>Email</h5><input id="emaillogin" type="text" placeholder="nombre@dominio.com"></span>
+			<span><h5>Contraseña</h5><input id="passlogin" type="password" placeholder="Contraseña"></span>
+			<button onclick="login()">Login</button>
+			</div>
+				
+				
 			<div id="datosPersonales">
-			<h3 ng-click="agregar()">Hola <span id="nombreusuario">{{users.nom}}</span>!</h3>
+			<h3>Hola <span id="nombreusuario">{{users.nom}}</span>!</h3>
 			<h5 id="nombre">({{users.email}})</h5>
 			</div>
                 

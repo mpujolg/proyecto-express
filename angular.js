@@ -4,8 +4,11 @@ var app = angular.module("Tareas", ["firebase"]);
 //main (y único) Controller
 app.controller("mainCtrl", function($scope, $firebaseObject) {
 	
-
+	//esta función se ejecuta cuando la página carga
 	comprovarEstado = function(){
+		//escondemos los forms de login y regitrar
+		$(".forms").hide();
+		
 		if(users==undefined){
 			$("#datosPersonales").hide();
 			$("#mainInput").hide();
@@ -14,6 +17,10 @@ app.controller("mainCtrl", function($scope, $firebaseObject) {
 			$("#datosPersonales").hide();
 			$("#datosPersonales").slideDown(2000)();
 		};
+	};
+	
+	mostrar= function(clase) {
+		$(clase).slideToggle();
 	};
 	
 	var ref = new Firebase("https://listatareasacamica.firebaseio.com");
@@ -28,12 +35,12 @@ app.controller("mainCtrl", function($scope, $firebaseObject) {
 	registrar = function(){
 	
 	//pedimos los datos necesarios
-	var nom = prompt("Nombre:");
-	var email = prompt("Email:");
-	var password = prompt("Contraseña:");
-	var repassword = prompt("Confimar contraseña:");
+	var nombre = $("#nombre").val();
+	var email = $("#email").val();
+	var password = $("#pass").val();;
+	var repassword = $("#repass").val();
 	
-	if(nom=="" || email=="" || password=="" || repassword==""){
+	if(nombre=="" || email=="" || password=="" || repassword==""){
 		alert("No puedes dejar campos vacíos");
 	} else if(password != repassword){
 		errors("Las dos contraseñas no coinciden");
@@ -53,11 +60,19 @@ app.controller("mainCtrl", function($scope, $firebaseObject) {
 					  	 id = userData.uid;
 					  
 								nouUsuari.set({
-										nom: nom,
+										nom: nombre,
 										id: id,
 										email: email,
 										pass: password,
 									});
+					  
+			   //incrementamos el nombre de usuarios en 1
+				ref_general.child("numusuarios").transaction(function(numactual) {
+					return numactual + 1;
+				});
+					  
+					  $("#registrar").slideUp(750);
+					  $("#login").delay(750).slideDown(750);
 
 				  }
 			});
@@ -68,8 +83,9 @@ app.controller("mainCtrl", function($scope, $firebaseObject) {
 	
 	//--------------------------------------------------LOGIN------------------------------------------------------------
 	login = function(){
-			var email = prompt("Email:");
-			var password = prompt("Contraseña:");
+			var email = $("#emaillogin").val();
+			var password = $("#passlogin").val();
+		
 			var ref = new Firebase("https://listatareasacamica.firebaseio.com");
 			ref.authWithPassword({
 			  email    : email,
