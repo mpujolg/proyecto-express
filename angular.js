@@ -150,9 +150,6 @@ app.controller("mainCtrl", function($scope, $firebaseObject) {
 	
 	
 	
-	
-	
-	
 	//creamos las referencias de Firebase en el apartado general y tareas
 	//con estas variables añadiremos, modificaremos y borraremos datos de Firebase
 	var ref_general = new Firebase("https://listatareasacamica.firebaseio.com/general");
@@ -166,7 +163,6 @@ app.controller("mainCtrl", function($scope, $firebaseObject) {
 	//--------------------------------------------------AGREGAR------------------------------------------------------------
 	$scope.agregar = function(){
 		
-		alert(titol);
 		//tomamos el valor del input
 		var titol = $("#titulo").val();
 		var data = new Date().toString().slice(0, -15);
