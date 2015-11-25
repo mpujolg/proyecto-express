@@ -33,11 +33,11 @@
                 </div>
                 <!-- Title -->
                 <span class="mdl-layout-title">Proyecto lista de tareas (VERSIÓN MARC PUJOL)</span>
-                <span class="mdl-layout-title dreta"> 
-					<span class="pequeno" onclick="resetearContrasena()">Olvidé la contrasenya</span>
-					<span onclick="mostrar('#login')">LOGIN</span>
+                <span class="mdl-layout-title dreta" ng-if="users==undefined"> 
+					<span onclick="mostrar('#recuperarpass')" class="button pequeno">Olvidé la contrasenya</span>
+					<span class="button" onclick="mostrar('#login')">LOGIN</span>
 					<span> | </span>
-					<span onclick="mostrar('#registrar')">REGISTRAR</span>
+					<span class="button" onclick="mostrar('#registrar')">REGISTRAR</span>
 				</span>
             </div>
         </header>
@@ -51,20 +51,27 @@
 			<span><h5>Email</h5><input id="email" type="text" placeholder="nombre@dominio.com"></span>
 			<span><h5>Contraseña</h5><input id="pass" type="password" placeholder="Contraseña"></span>
 			<span><h5>Confirmar Contraseña</h5><input id="repass" type="password" placeholder="Repita la contraseña"></span>
-			<a><button onclick="registrar()">Registrar</button></a>
+			<a><button class="button" onclick="registrar()">Registrar</button></a>
 			</div>
 				
 			<div class="forms" id="login">
 			<h3>Iniciar Sesión</h3>
 			<span><h5>Email</h5><input id="emaillogin" type="text" placeholder="nombre@dominio.com"></span>
 			<span><h5>Contraseña</h5><input id="passlogin" type="password" placeholder="Contraseña"></span>
-			<button onclick="login()">Login</button>
+			<button class="button" onclick="login()">Login</button>
+			</div>
+				
+			<div class="forms" id="recuperarpass">
+			<h3>¿Olvidaste la contraseña?</h3>
+			<span><h5>Email</h5><input id="emailrecuperarpass" type="text" placeholder="nombre@dominio.com"></span>
+			<button class="button" onclick="resetearContrasena()">Enviar nueva contraseña</button>
 			</div>
 				
 				
 			<div id="datosPersonales">
 			<h3>Hola <span id="nombreusuario">{{users.nom}}</span>!</h3>
 			<h5 id="nombre">({{users.email}})</h5>
+			<h6 id="id">{{users.id}}</h6>
 			</div>
                 
  <div class="task-list mdl-card mdl-shadow--2dp">
@@ -78,8 +85,8 @@
 	 
     <div class="task-item" ng-repeat="(id, tarea) in tareas"> <!-- NG-REPEAT DE CADA TAREA EN LAS TAREAS (con id para poder seleccionar concertamente tarea por tarea) -->
         <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-card__supporting-text is-checkedis-checked {{tarea.completada}}">
-            <span ng-click="completar(id)" class="mdl-checkbox__label">{{tarea.titol}}</span>
-			<img ng-if="tarea.autor==users.nom" ng-click="eliminar(id)" id="delete" src="public/images/delete.ico"> <!-- ELIMINAR LA TAREA (coge el id para borrar solo esta tarea) -->
+            <span ng-click="completar(id, tarea.id)" class="mdl-checkbox__label">{{tarea.titol}}</span>
+			<img ng-if="tarea.id==users.id" ng-click="eliminar(id)" id="delete" src="public/images/delete.ico"> <!-- ELIMINAR LA TAREA (coge el id para borrar solo esta tarea) -->
 			<div class="anotacions">
 				<strong>{{tarea.autor}}</strong> - {{tarea.data}}
 			</div>

@@ -20,7 +20,10 @@ app.controller("mainCtrl", function($scope, $firebaseObject) {
 	};
 	
 	mostrar= function(clase) {
-		$(clase).slideToggle();
+		$("#login").slideUp();
+		$("#registrar").slideUp();
+		$("#recuperarpass").slideUp();
+		$(clase).delay(350).slideDown();
 	};
 	
 	var ref = new Firebase("https://listatareasacamica.firebaseio.com");
@@ -71,8 +74,27 @@ app.controller("mainCtrl", function($scope, $firebaseObject) {
 					return numactual + 1;
 				});
 					  
-					  $("#registrar").slideUp(750);
-					  $("#login").delay(750).slideDown(750);
+					  //iniciamos sesión
+					var ref = new Firebase("https://listatareasacamica.firebaseio.com");
+					ref.authWithPassword({
+					  email    : email,
+					  password : password
+					}, function(error, authData) {
+					  if (error) {
+						console.log("Login Failed!", error);
+						 alert("Ha habido un error :( (" + error + ")");
+					  } else {
+						console.log("Authenticated successfully with payload:", authData);
+							var refer = new Firebase("https://listatareasacamica.firebaseio.com");
+							var dbUsuari = refer.getAuth();
+								if(dbUsuari){
+									//Creem una ruta que sigui usuers/ID, allà es guardaràn les dades de l'usuari
+									var users = new Firebase("https://listatareasacamica.firebaseio.com/users/" + dbUsuari.uid + "");
+									$scope.users = $firebaseObject(users);
+									location.reload(); //refrescar la página
+								};
+					  }
+					});
 
 				  }
 			});
@@ -111,17 +133,17 @@ app.controller("mainCtrl", function($scope, $firebaseObject) {
 	
 		//------------------------------------------------RESET-CONTRASEÑA----------------------------------------------------------
 		resetearContrasena = function(){
-			var email = prompt("Introdueix el teu correu");
-
+			var email = $("#emailrecuperarpass").val();
 			var ref = new Firebase("https://listatareasacamica.firebaseio.com");
 		ref.resetPassword({
 		  email : email
 		}, function(error) {
 		  if (error === null) {
-			alert("Se ha enviado el correo de recuperación :)");
+			alert("Se ha enviado el correo de recuperación :)\nEntra en tu correo y verás la nueva contraseña...");
+			  mostrar("#login");
 		  } else {
 			alert("Error al enviar el correo:", error);
-			console.log("Error enviat el correu de recuperació:", error);
+			console.log("Error enviant el correu de recuperació:", error);
 		  }
 		});
 		}
@@ -144,17 +166,20 @@ app.controller("mainCtrl", function($scope, $firebaseObject) {
 	//--------------------------------------------------AGREGAR------------------------------------------------------------
 	$scope.agregar = function(){
 		
+		alert(titol);
 		//tomamos el valor del input
 		var titol = $("#titulo").val();
 		var data = new Date().toString().slice(0, -15);
 		var autor = $("#nombreusuario").html();
+		var id = $("#id").html();
 		
 		//agregamos la tarea a Firebase
 		ref.push({
 			titol: titol,
 			completada: "is-not-checked",
 			data: data,
-			autor: autor
+			autor: autor,
+			id: id
 		});
 		
 			//incrementamos el número de tareas totales en 1
@@ -183,9 +208,13 @@ app.controller("mainCtrl", function($scope, $firebaseObject) {
 	
 	
 	//-------------------------------------------------COMPLETAR-----------------------------------------------------------
-	$scope.completar = function(id){
-		var tareaPorId = new Firebase("https://listatareasacamica.firebaseio.com/tareas/" + id);
-		tareaPorId.child("completada").set("is-checked");
+	$scope.completar = function(id, tareaid){
+		//si el id del usuario que publico la tarea es el mismo que el id del usuario con la sesión iniciada...
+		if(tareaid == $("#id").html()){
+			var tareaPorId = new Firebase("https://listatareasacamica.firebaseio.com/tareas/" + id);
+			//damos la class .is-checked a esa tarea
+			tareaPorId.child("completada").set("is-checked");
+		}
 	};
 	
 	

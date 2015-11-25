@@ -184,3 +184,11 @@ h3, h5, h6 {
 	font-size: 18px;
 	padding: 8px 15px;
 }
+
+#id {
+	display: none;
+}
+
+.button {
+	cursor: pointer;
+}
